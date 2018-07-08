@@ -1,1 +1,157 @@
-<h1>index</h1>
+
+<h1 class="center-align" style="padding-top: 60px;">
+  <a id="writing" href="#" class="typewrite" data-period="0" data-type='[ "您好：","我是張凱喬", "現正求職中", "歡迎光臨！" ]' style="text-decoration: none;cursor: default;">
+    <span class="wrap"></span>
+  </a>
+</h1>
+
+<div class="row">
+	<div class="col s12 m8 offset-m2">
+
+<div id='buttons' class='animate-start'>
+	<table class="highlight">
+		<thead>
+			<tr>
+				<th colspan="2" style="text-align: center;">
+					<h5>張凱喬 個人CV/履歷/相關QA</h5>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					<h5>&nbsp;&nbsp;關於專案管理/產業分析</h5>
+				</td>
+				<td>
+					<a class="waves-effect waves-light btn">Enter<i class="material-icons right">send</i></a>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h5>&nbsp;&nbsp;關於前端/全端工程師</h5>
+				</td>
+				<td>
+					<a class="waves-effect waves-light btn">Enter<i class="material-icons right">send</i></a>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h6>&nbsp;&nbsp;沒事，我只是路過...</h6>
+				</td>
+				<td>
+					<a class="waves-effect waves-light btn-small"><i class="material-icons right"></i>try out</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+
+	</div>
+</div>
+
+
+<script>
+
+//credit https://css-tricks.com/snippets/css/typewriter-effect/
+
+var endWriting = function(){
+	console.log('end');
+	$( "#writing>span" ).removeAttr( "id" );
+	$('#buttons').addClass('animated fadeInUp');
+}
+
+var TxtType = function(el, toRotate, period) {
+    this.toRotate = toRotate;
+    this.el = el;
+    this.loopNum = 0;
+    this.period = parseInt(period, 10) || 2000;
+    this.txt = '';
+    this.final = false;
+    this.tick();
+    this.isDeleting = false;
+};
+
+TxtType.prototype.tick = function() {
+    var i = this.loopNum % this.toRotate.length;
+    var fullTxt = this.toRotate[i];
+
+    var round = function(){
+    	setTimeout(function() {
+	    that.tick();
+	    }, delta);
+    }
+
+    if (this.isDeleting && this.final==false) {
+    this.txt = fullTxt.substring(0, this.txt.length - 1);
+    }else {
+    this.txt = fullTxt.substring(0, this.txt.length + 1);
+    }
+
+    this.el.innerHTML = '<span id="doing-write" class="wrap">'+this.txt+'</span>';
+
+    var that = this;
+    var delta = 300 - Math.random() * 100;
+
+    if (this.isDeleting) { delta /= 2; }
+
+    if (!this.isDeleting && this.txt === fullTxt) {
+    delta = this.period;
+    this.isDeleting = true;
+    if (this.final==true){ 
+    	endWriting();	
+    	return;} //最後完成
+    } else if (this.isDeleting && this.txt === '') {
+    this.isDeleting = false;
+    this.loopNum++;
+    delta = 500;
+    }
+
+    if(this.loopNum<=this.toRotate.length){
+    	if(this.loopNum==(this.toRotate.length)){
+    		throw new Error("Stopping the function!");
+    	}else{
+    		if(this.loopNum==(this.toRotate.length-1)){
+    			this.final=true;
+    		}
+    		round();
+    	}
+    }
+
+};
+
+window.onload = function() {
+    var elements = document.getElementsByClassName('typewrite');
+    for (var i=0; i<elements.length; i++) {
+        var toRotate = elements[i].getAttribute('data-type');
+        var period = elements[i].getAttribute('data-period');
+        if (toRotate) {
+          new TxtType(elements[i], JSON.parse(toRotate), period);
+        }
+    }
+};
+
+</script>
+
+<style>
+
+#doing-write{ border-right: 0.08em solid #fff}
+
+@keyframes blink { 
+   50% { border-right: 0.08em solid white; } 
+}
+
+.typewrite > .wrap { 
+	border-right: 0.08em solid transparent;
+	animation: blink .5s step-end infinite alternate; 
+}
+
+#buttons {
+	margin-top: 20px;
+} 
+
+.animate-start{
+	opacity: 0;
+}
+
+</style>
