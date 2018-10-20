@@ -51,7 +51,7 @@ group :development do
 
   gem 'capistrano', '~> 3.6'
   gem 'capistrano-bundler', '~> 1.3'
-
+  gem 'capistrano-rvm'
   gem 'capistrano-rails'
   gem 'capistrano-passenger'
 
