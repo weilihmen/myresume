@@ -26,7 +26,7 @@ set :deploy_to, "/home/deploy/myresume"
 append :linked_files, "config/database.yml", "config/secrets.yml"
 
 # Default value for linked_dirs is []
-append :linked_dirs, '.bundle', "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -41,15 +41,3 @@ append :linked_dirs, '.bundle', "log", "tmp/pids", "tmp/cache", "tmp/sockets", "
 # set :ssh_options, verify_host_key: :secure
 
 set :passenger_restart_with_touch, true
-
-set :bundle_roles, :all                                         # this is default
-set :bundle_servers, -> { release_roles(fetch(:bundle_roles)) } # this is default
-set :bundle_binstubs, -> { shared_path.join('bin') }            # default: nil
-set :bundle_gemfile, -> { release_path.join('MyGemfile') }      # default: nil
-set :bundle_path, -> { shared_path.join('bundle') }             # this is default. set it to nil for skipping the --path flag.
-set :bundle_without, %w{development test}.join(' ')             # this is default
-set :bundle_flags, '--deployment --quiet'                       # this is default
-set :bundle_env_variables, {}                                   # this is default
-set :bundle_clean_options, ""                                   # this is default. Use "--dry-run" if you just want to know what gems would be deleted, without actually deleting them
-set :bundle_jobs, 4 # default: nil, only available for Bundler >= 1.4
-set :bundle_binstubs, -> { shared_path.join('bin') }
