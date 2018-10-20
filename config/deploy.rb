@@ -3,7 +3,7 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.11.0"
 
-set :application, "myresume"
+set :application, "resume"
 set :repo_url, "git@github.com:weilihmen/myresume.git"
 
 # Default branch is :master
